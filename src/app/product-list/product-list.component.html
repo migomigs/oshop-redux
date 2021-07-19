@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row mb-4">
+    <categories class="col-md-3"></categories>
+    <div class="container col-md-9 mb-3 product-list">
+      <ng-container *ngFor="let product of productList; let index = index">
+        <product-widget
+          [title]="product.title"
+          [price]="product.price"
+          [imgUrl]="product.imgUrl"
+          [qtyInCart]="product.qtyInCart"
+          (qtyChange)="updateQty(product, $event)"
+        ></product-widget>
+      </ng-container>
+    </div>
+  </div>
+</div>

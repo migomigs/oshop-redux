@@ -1,0 +1,9 @@
+<product-profile
+  [title]="title"
+  [price]="price"
+  [imgUrl]="imgUrl"
+></product-profile>
+<add-to-cart-widget
+  [qtyInCart]="qtyInCart"
+  (qtyChange)="updateQty($event)"
+></add-to-cart-widget>

@@ -1,0 +1,17 @@
+<div class="card rounded-3 shadow-sm">
+  <div class="card-header">
+    <img
+      [src]="imgUrl"
+      onerror="this.onerror=null; this.src='../../assets/images/no-image-available.png'"
+      alt=""
+    />
+  </div>
+  <div class="card-body">
+    <h4 class="card-title fw-normal">
+      {{ title }}
+    </h4>
+    <ul class="list-unstyled">
+      <li>{{ price | currency }}</li>
+    </ul>
+  </div>
+</div>

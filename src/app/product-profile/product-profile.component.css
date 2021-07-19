@@ -1,0 +1,11 @@
+img {
+  width: 100%;
+}
+
+.card-header {
+  padding: 0;
+}
+
+.card-body ul {
+  margin-bottom: 0;
+}
