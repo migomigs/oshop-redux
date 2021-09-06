@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { faLeaf } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'bs-navbar',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BsNavbarComponent implements OnInit {
 
-  constructor() { }
+  faLeaf = faLeaf;
+
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
+
   }
 
 }

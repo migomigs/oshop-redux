@@ -1,0 +1,12 @@
+<div class="row g-5">
+  <shipping-details class="col-md-7"></shipping-details>
+  <order-summary class="col-md-5"></order-summary>
+</div>
+<ng-container *ngIf="error != null">
+  <div class="alert alert-danger">
+    Sorry for the inconvenience. Error encountered in placing an order.
+  </div>
+</ng-container>
+<ng-container *ngIf="orderList$ | async as orderList">
+  <button (click)="placeOrder(orderList)">Place Order</button>
+</ng-container>

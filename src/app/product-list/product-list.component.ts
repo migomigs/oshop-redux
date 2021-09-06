@@ -1,5 +1,14 @@
+import { NgRedux, select } from '@angular-redux/store';
+import { LEADING_TRIVIA_CHARS } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit } from '@angular/core';
+import { Observable, combineLatest } from 'rxjs';
+import { AppError } from '../common/app-error';
 import { Product, ProductsService } from '../services/products.service';
+import { DataState, IAppState } from '../store';
+
+const getErrorType = (state: IAppState): string | null=>{
+  return typeof state.dataState.error;
+}
 
 @Component({
   selector: 'product-list',
@@ -8,30 +17,19 @@ import { Product, ProductsService } from '../services/products.service';
 })
 export class ProductListComponent implements OnInit {
 
-  productList !: any;
-
-  constructor(private productsService: ProductsService) { }
+  @select('productList') productList$ !:Observable<Product[]>;
+  @select('dataState') dataState$ !: Observable<DataState>;
+  @select(['dataState, error']) error$ !: Observable<AppError>;
+  constructor(private productsService: ProductsService,
+   private ngRedux: NgRedux<IAppState>
+    ) { }
 
   ngOnInit(): void {
-    this.productsService.getProducts().subscribe(
-      (result) =>{
-       this.productList =  result;
-      console.log('list value changes', this.productList);
-      console.log('try to capture doc id', );
-    });
+
   }
 
-  log(product: any){
-     console.log('product', product);
-  }
-
-  updateQty(product: Product, qty: string){
-
-    console.log('Product', product);
-    console.log('New qty', qty);
-    this.productsService.updateProductQty(product, parseInt(qty));
-  }
-
-  
+  trackByFn(index: number, product: any): number {
+    return product.serialNumber;
+ }
 
 }

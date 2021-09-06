@@ -2,9 +2,7 @@
   background-color: gray;
   border-radius: 3px;
   color: white;
-  text-align: center;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  height: 2rem;
 }
 
 .container {

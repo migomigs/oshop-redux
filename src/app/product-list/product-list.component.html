@@ -1,16 +1,29 @@
-<div class="container">
-  <div class="row mb-4">
+<div class="container" *ngIf="dataState$ | async as dataState">
+  <div
+    *ngIf="!dataState.isLoading && dataState.error"
+    class="alert alert-danger"
+  >
+    Sorry for the inconvenience. {{ dataState.error.message }}
+  </div>
+  <div class="row mb-4" *ngIf="dataState.isLoaded">
     <categories class="col-md-3"></categories>
     <div class="container col-md-9 mb-3 product-list">
-      <ng-container *ngFor="let product of productList; let index = index">
+      <div
+        *ngFor="
+          let product of productList$ | async;
+          let index = index;
+          trackBy: trackByFn
+        "
+      >
         <product-widget
           [title]="product.title"
           [price]="product.price"
           [imgUrl]="product.imgUrl"
-          [qtyInCart]="product.qtyInCart"
-          (qtyChange)="updateQty(product, $event)"
-        ></product-widget>
-      </ng-container>
+          [qtyInCart]="product.qtyInCart ? product.qtyInCart : 0"
+          [productId]="product.id"
+        >
+        </product-widget>
+      </div>
     </div>
   </div>
 </div>

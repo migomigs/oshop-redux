@@ -1,9 +1,15 @@
-<div *ngIf="qtyInCart == 0" class="box">ADD TO CART</div>
+<div
+  *ngIf="qtyInCart == 0 || qtyInCart == null"
+  class="box text-center"
+  (click)="incrementQtyInCart(qtyInCart)"
+>
+  ADD TO CART
+</div>
 <div
   *ngIf="qtyInCart > 0"
   class="container d-flex justify-content-between border border-light"
 >
-  <div class="icon-container" (click)="addQty()">
+  <div class="icon-container" (click)="incrementQtyInCart(qtyInCart)">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       height="100%"
@@ -17,7 +23,7 @@
     </svg>
   </div>
   <div class="text-center">{{ qtyInCart }} in cart</div>
-  <div class="icon-container">
+  <div class="icon-container" (click)="decrementQtyInCart()">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       height="100%"

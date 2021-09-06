@@ -39,14 +39,13 @@ export class UpdateProductComponent implements OnInit {
   }
 
   submitForm(){
-    console.log(this.form);
     let newProduct: Product = {
+      id: '',
       title:  this.form.get('title')?.value,
       price:  this.form.get('price')?.value,
       imgUrl: this.form.get('imgUrl')?.value,
+      qtyInCart: 0
     }
-
-    console.log('Product details', newProduct);
 
     this.productsService.addProduct(newProduct)
   }

@@ -1,0 +1,23 @@
+<div class="dropdown" (click)="toggleDisplay()">
+  User Menu
+  <div
+    *ngIf="isDisplayed"
+    class="dropdown-menu"
+    aria-labelledby="dropdownMenuLink"
+  >
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+</div>
+<!-- <a
+data-toggle="dropdown"
+aria-haspopup="true"
+aria-expanded="false"
+class="btn btn-secondary dropdown-toggle"
+href="#"
+role="button"
+id="dropdownMenuLink"
+>
+User Name
+</a> -->

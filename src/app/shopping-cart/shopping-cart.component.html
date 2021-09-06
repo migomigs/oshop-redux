@@ -1,0 +1,41 @@
+<ng-container *ngIf="productInCart$ | async as productInCart">
+  <ng-container *ngIf="productInCart.length > 0; else noItemsBlock">
+    <p>You have NUMBER items in your shopping cart.</p>
+    <button>Clear Shopping Cart</button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Product</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of productInCart$ | async; trackBy: trackByFn">
+          <td><img [src]="product.imgUrl" alt="" />{{ product.title }}</td>
+          <td>
+            <add-to-cart-widget
+              [qtyInCart]="product.qtyInCart"
+              [productId]="product.id"
+            ></add-to-cart-widget>
+          </td>
+          <td>{{ getSubtotal(product) | currency }}</td>
+        </tr>
+        <tr>
+          <td colspan="3"></td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-container *ngIf="productInCart$ | async as productInCart">
+      <button
+        *ngIf="productInCart.length > 0"
+        (click)="checkout(productInCart)"
+      >
+        Check Out
+      </button>
+    </ng-container>
+  </ng-container>
+</ng-container>
+<ng-template #noItemsBlock>
+  <div>There are no items in your cart.</div>
+</ng-template>

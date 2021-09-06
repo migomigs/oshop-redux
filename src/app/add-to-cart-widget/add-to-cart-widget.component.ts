@@ -1,5 +1,7 @@
+import { NgRedux } from '@angular-redux/store';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ProductsService } from '../services/products.service';
+import { IAppState } from '../store';
 
 @Component({
   selector: 'add-to-cart-widget',
@@ -9,14 +11,22 @@ import { ProductsService } from '../services/products.service';
 export class AddToCartWidgetComponent implements OnInit {
 
   @Input('qtyInCart') qtyInCart !: number;
-  @Output('qtyChange') qtyChange = new EventEmitter();
-  constructor(private productsService: ProductsService) { }
+  @Input('productId') productId !: string;
+  constructor(private productsService: ProductsService,
+     private ngRedux: NgRedux<IAppState>) { }
 
   ngOnInit(): void {
+    
   }
 
-  addQty(){
-    this.qtyChange.emit(String(this.qtyInCart+1));
+  incrementQtyInCart(qty:number){
+
+    this.productsService.updateProductQty(this.productId, this.qtyInCart+1);
+  }
+
+  decrementQtyInCart(){
+
+    this.productsService.updateProductQty(this.productId, this.qtyInCart-1);
   }
 
 }

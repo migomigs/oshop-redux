@@ -11,17 +11,10 @@ export class ProductWidgetComponent implements OnInit {
   @Input('price') price !: number;
   @Input('imgUrl') imgUrl !: string;
   @Input('qtyInCart') qtyInCart !: number;
-  @Output('qtyChange') qtyChange = new EventEmitter();
+  @Input('productId') productId !: string;
   constructor() { }
 
   ngOnInit(): void {
-  
-  }
-
-  updateQty(eventArgs: Event){
-    console.log('eventArgs', eventArgs);
-     this.qtyChange.emit(eventArgs);
-     
   }
 
 }
