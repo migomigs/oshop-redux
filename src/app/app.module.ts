@@ -4,6 +4,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { CommonModule } from "@angular/common";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -61,7 +62,7 @@ const appRoutes: Routes = [
       canActivate:[AuthGuard]},
   {path: 'admin/products', component: ProductAdminComponent,
       canActivate:[AuthGuard]},
-  {path: 'admin/products/id:', component: UpdateProductComponent,
+  {path: 'admin/products/:id', component: UpdateProductComponent,
       canActivate:[AuthGuard]},
   {path: '**', component: PageNotFoundComponent}
 ]
@@ -88,10 +89,12 @@ const appRoutes: Routes = [
     OrderSummaryComponent,
     CartNavComponent,
     NavHomeComponent,
-    UserMenuComponent
+    UserMenuComponent,
+    MyOrdersComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     FontAwesomeModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),

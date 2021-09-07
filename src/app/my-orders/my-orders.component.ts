@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { faTintSlash } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from '../auth/auth.service';
 import { OrdersService } from '../services/orders.service';
+import { Order } from '../store';
 
 @Component({
   selector: 'my-orders',
@@ -8,10 +11,27 @@ import { OrdersService } from '../services/orders.service';
 })
 export class MyOrdersComponent implements OnInit {
 
-  constructor(private orderService: OrdersService) { }
+  error !: string;
+  myOrders !: Array<Order> | null;
+  another = [1,2,3,4,5];
+  whut = true;
+
+  constructor(private orderService: OrdersService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.orderService.loadAllOrders();
+
+    let uid = this.authService.currentUser?.uid;
+
+    if(uid){
+      this.orderService.getMyOrders(uid)
+        .subscribe(        
+           orders => {
+            this.myOrders = orders as Order[];
+            console.log('myOrders', this.myOrders);
+          }
+        );
+    }
+
   }
 
 }

@@ -2,12 +2,6 @@ import { tassign } from "tassign";
 import { AppError } from "./common/app-error";
 import { Product, ProductsService } from "./services/products.service";
 
-export enum ActionTypes {
-  THROW_PRODUCT_ERRORS = 'THROW_LOADING_ERROR'
-
-}
-
-
 export interface Action {
     type: string,
     payload ?: any
@@ -46,8 +40,6 @@ export let initState: IAppState =  {
     },
     orderList:[],
   }
-
-
 
 export const selectProductInCart = (state: IAppState) =>{
      state.productList.map((product: Product) => product.qtyInCart > 0);
